@@ -1,0 +1,31 @@
+<div class="container mt-5">
+    <h2>Usuarios Registrados</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody id="userTable"></tbody>
+    </table>
+    <script>
+        fetch("/users")
+            .then(response => response.json())
+            .then(data => {
+                const tableBody = document.getElementById("userTable");
+                data.forEach(user => {
+                    const row = `
+                        <tr>
+                            <td>${user.id}</td>
+                            <td>${user.first_name}</td>
+                            <td>${user.last_name}</td>
+                            <td>${user.email}</td>
+                        </tr>`;
+                    tableBody.innerHTML += row;
+                });
+            });
+    </script>
+</div>
